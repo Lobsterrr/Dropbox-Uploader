@@ -1,5 +1,7 @@
 # Dropbox Uploader
 
+**Note:** This fork extends compatibility with python notebooks where bash "read" commands usually don't work. The original version can be found [here](https://github.com/andreafabrizi/Dropbox-Uploader).
+
 Dropbox Uploader is a **BASH** script which can be used to upload, download, delete, list files (and more!) from **Dropbox**, an online file sharing, synchronization and backup service. 
 
 It's written in BASH scripting language and only needs **cURL**.
