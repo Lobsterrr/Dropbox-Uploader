@@ -1544,20 +1544,21 @@ else
     echo -ne " Now, click on the \"Create App\" button.\n\n"
 
     echo -ne " When your new App is successfully created, please click on the Generate button\n"
-    echo -ne " under the 'Generated access token' section, then copy and paste the new access token here:\n\n"
+    echo -ne " under the 'Generated access token' section, then execute the following command:\n\n"
+    echo -ne " echo \"INPUT_YOUR_ACCESS_TOKEN_HERE\" > token.txt\n\n"
 
-    echo -ne " # Access token: "
-    read -r OAUTH_ACCESS_TOKEN
-
-    echo -ne "\n > The access token is $OAUTH_ACCESS_TOKEN. Looks ok? [y/N]: "
-    read -r answer
-    if [[ $answer != "y" ]]; then
-        remove_temp_files
-        exit 1
+    if [ ! -f ./token.txt ]; then
+    	exit 0
     fi
 
+    OAUTH_ACCESS_TOKEN=$(cat token.txt)
+    echo -ne "\n Found token.txt with access token: $OAUTH_ACCESS_TOKEN\n\n"
+    echo -ne " You can unlink this account if the token is wrong, using:\n"
+    echo -ne " ./dropbox-uploader.sh unlink\n\n"
+
     echo "OAUTH_ACCESS_TOKEN=$OAUTH_ACCESS_TOKEN" > "$CONFIG_FILE"
-    echo "   The configuration has been saved."
+    echo -ne " The configuration has been saved.\n"
+    rm token.txt
 
     remove_temp_files
     exit 0
